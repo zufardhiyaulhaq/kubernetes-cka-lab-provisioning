@@ -1,0 +1,4 @@
+---
+# tasks file for kubeconfig
+- include: 01-copy.yml
+

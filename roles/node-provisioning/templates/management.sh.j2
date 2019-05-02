@@ -1,0 +1,27 @@
+virt-clone -o {{ template_vm }} -n {{ pod_name }}-{{ management.name }} -f /data/vms/{{ pod_name }}-{{ management.name }}.qcow2
+virsh start {{ pod_name }}-{{ management.name }}
+
+sleep 20
+
+ssh {{ template_user }}@{{ template_ip }} /bin/bash << EOF
+sudo su
+sed -i "s/address.*/address {{ management.ip }}/g" /etc/network/interfaces
+sed -i "s/netmask.*/netmask {{ netmask }}/g" /etc/network/interfaces
+sed -i "s/gateway.*/gateway {{ gateway }}/g" /etc/network/interfaces
+echo "{{ pod_name }}-{{ management.name }}" > /etc/hostname
+echo "{{ management.ip }} {{ pod_name }}-{{ management.name }}" >> /etc/hosts
+echo "{{ cluster[0].master.ip }} {{ pod_name }}-{{ cluster[0].name }}-{{ cluster[0].master.name }}" >> /etc/hosts
+echo "{{ cluster[0].worker.ip }} {{ pod_name }}-{{ cluster[0].name }}-{{ cluster[0].worker.name }}" >> /etc/hosts
+echo "{{ cluster[1].master.ip }} {{ pod_name }}-{{ cluster[1].name }}-{{ cluster[1].master.name }}" >> /etc/hosts
+echo "{{ cluster[1].worker.ip }} {{ pod_name }}-{{ cluster[1].name }}-{{ cluster[1].worker.name }}" >> /etc/hosts
+echo "{{ cluster[2].master.ip }} {{ pod_name }}-{{ cluster[2].name }}-{{ cluster[2].master.name }}" >> /etc/hosts
+echo "{{ cluster[2].worker.ip }} {{ pod_name }}-{{ cluster[2].name }}-{{ cluster[2].worker.name }}" >> /etc/hosts
+EOF
+
+virsh shutdown {{ pod_name }}-{{ management.name }}
+sleep 20
+
+virsh detach-interface {{ pod_name }}-{{ management.name }} --type network --config
+virsh attach-interface --domain {{ pod_name }}-{{ management.name }} --type network --source {{ network_name }} --model virtio --config
+
+virsh start {{ pod_name }}-{{ management.name }}

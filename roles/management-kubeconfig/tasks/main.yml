@@ -1,0 +1,4 @@
+---
+# tasks file for management-kubeconfig
+- include: 01-provisioning.yml
+- include: 02-kubeconfig.yml

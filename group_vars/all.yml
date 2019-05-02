@@ -1,0 +1,38 @@
+template_vm: template-ubuntu1604
+template_ip: 192.168.100.254
+template_user: zufar
+
+network_name: net-10.20.20
+netmask: 255.255.255.0
+gateway: 10.20.20.1
+
+kubeadmin_config: /etc/kubernetes/admin.conf
+kubernetes_token: b0f7b8.8d1767876297d85c
+pod_network_cidr: "10.244.0.0/16"
+
+pod_name: pod1
+cluster:
+- name: cluster1
+  master:
+    name: master
+    ip: 10.20.20.10
+  worker: 
+    name: worker
+    ip: 10.20.20.11
+- name: cluster2
+  master: 
+    name: master
+    ip: 10.20.20.12
+  worker: 
+    name: worker
+    ip: 10.20.20.13
+- name: cluster3
+  master: 
+    name: master
+    ip: 10.20.20.14
+  worker: 
+    name: worker
+    ip: 10.20.20.15
+management:
+  name: management
+  ip: 10.20.20.16

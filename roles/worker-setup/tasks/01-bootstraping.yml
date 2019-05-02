@@ -1,0 +1,21 @@
+---
+- name: Join to Kubernetes cluster
+  shell: |
+    kubeadm join --token {{ kubernetes_token }} \
+                --discovery-token-unsafe-skip-ca-verification \
+                {{ cluster[0].master.ip }}:6443
+  when: ansible_default_ipv4.address == '{{ cluster[0].worker.ip }}'
+
+- name: Join to Kubernetes cluster
+  shell: |
+    kubeadm join --token {{ kubernetes_token }} \
+                --discovery-token-unsafe-skip-ca-verification \
+                {{ cluster[1].master.ip }}:6443
+  when: ansible_default_ipv4.address == '{{ cluster[1].worker.ip }}'
+
+- name: Join to Kubernetes cluster
+  shell: |
+    kubeadm join --token {{ kubernetes_token }} \
+                --discovery-token-unsafe-skip-ca-verification \
+                {{ cluster[2].master.ip }}:6443
+  when: ansible_default_ipv4.address == '{{ cluster[2].worker.ip }}'

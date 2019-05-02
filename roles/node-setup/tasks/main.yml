@@ -1,0 +1,4 @@
+---
+# tasks file for node-setup
+- include: 01-swap-off.yml
+- include: 02-install-package.yml

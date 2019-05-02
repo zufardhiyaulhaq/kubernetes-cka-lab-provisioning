@@ -1,0 +1,3 @@
+---
+# tasks file for master-setup
+- include: 01-bootstraping.yml

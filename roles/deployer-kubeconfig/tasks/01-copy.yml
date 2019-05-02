@@ -1,0 +1,17 @@
+---
+- name: create script directory
+  file:
+    path: ~/script/kubeconfig
+    state: directory
+
+- name: copy kubeconfig from all master into deployer
+  shell: |
+    scp -o StrictHostKeyChecking=no {{ cluster[0].master.ip }}:~/.kube/config  ~/script/kubeconfig/cluster1
+    scp -o StrictHostKeyChecking=no {{ cluster[1].master.ip }}:~/.kube/config  ~/script/kubeconfig/cluster2
+    scp -o StrictHostKeyChecking=no {{ cluster[2].master.ip }}:~/.kube/config  ~/script/kubeconfig/cluster3
+
+- name: copy kubeconfig from all deployer to management
+  shell: |
+    scp -o StrictHostKeyChecking=no ~/script/kubeconfig/cluster1 {{ management.ip }}:~/
+    scp -o StrictHostKeyChecking=no ~/script/kubeconfig/cluster2 {{ management.ip }}:~/
+    scp -o StrictHostKeyChecking=no ~/script/kubeconfig/cluster3 {{ management.ip }}:~/

@@ -1,0 +1,16 @@
+---
+# tasks file for flannel
+- name: Add Flannel
+  shell: |
+    kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  when: ansible_default_ipv4.address == '{{ cluster[0].master.ip }}'
+
+- name: Add Flannel
+  shell: |
+    kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  when: ansible_default_ipv4.address == '{{ cluster[1].master.ip }}'
+
+- name: Add Flannel
+  shell: |
+    kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  when: ansible_default_ipv4.address == '{{ cluster[2].master.ip }}'

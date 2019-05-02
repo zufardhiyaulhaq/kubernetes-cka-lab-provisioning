@@ -1,0 +1,3 @@
+---
+# tasks file for node-provisioning
+- include: 01-provisioning.yml
