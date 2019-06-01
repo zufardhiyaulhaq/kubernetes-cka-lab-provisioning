@@ -19,8 +19,8 @@
   apt:
     pkg:
       - docker.io
-      - kubectl
-      - kubelet
-      - kubeadm
+      - kubectl=1.14.1-00
+      - kubelet=1.14.1-00
+      - kubeadm=1.14.1-00
     update_cache: yes
 

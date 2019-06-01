@@ -1,3 +1,0 @@
----
-# tasks file for worker-setup
-- include: 01-bootstraping.yml

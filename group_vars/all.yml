@@ -43,6 +43,7 @@ kubernetes:
     install_network: true
     network:
       type: calico
+      pod_network_cidr: "192.168.0.0/16"
     master: 
       - name: master
         ip: 10.20.20.13
