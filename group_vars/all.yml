@@ -1,38 +1,113 @@
+# python interpreter
+# by default ubuntu 16.04 using python3
+ansible_python_interpreter: /usr/bin/python3
+
+# Template in KVM
+# you can create by yourself
 template_vm: template-ubuntu1604
 template_ip: 192.168.100.254
-template_user: zufar
+template_user: root
 
+# Network in KVM
+# you can create by yourself
 network_name: net-10.20.20
 netmask: 255.255.255.0
 gateway: 10.20.20.1
 
 kubeadmin_config: /etc/kubernetes/admin.conf
 kubernetes_token: b0f7b8.8d1767876297d85c
-pod_network_cidr: "10.244.0.0/16"
 
-pod_name: pod1
-cluster:
-- name: cluster1
-  master:
-    name: master
-    ip: 10.20.20.10
-  worker: 
-    name: worker
-    ip: 10.20.20.11
-- name: cluster2
-  master: 
-    name: master
-    ip: 10.20.20.12
-  worker: 
-    name: worker
-    ip: 10.20.20.13
-- name: cluster3
-  master: 
-    name: master
-    ip: 10.20.20.14
-  worker: 
-    name: worker
-    ip: 10.20.20.15
-management:
-  name: management
-  ip: 10.20.20.16
+# vm_name variable is used for creating KVM instance name
+# for example, zu, all instance name will start with zu
+vm_name: zu
+
+# Kubernetes Cluster
+kubernetes:
+  cluster:
+  - name: k8s
+    install_worker: true
+    install_network: true
+    network:
+      type: flannel
+      pod_network_cidr: "10.244.0.0/16"
+    master:
+      - name: master
+        ip: 10.20.20.10
+    worker: 
+      - name: worker0
+        ip: 10.20.20.11
+      - name: worker1
+        ip: 10.20.20.12
+  - name: hk8s
+    install_worker: true
+    install_network: true
+    network:
+      type: calico
+    master: 
+      - name: master
+        ip: 10.20.20.13
+    worker: 
+      - name: worker0
+        ip: 10.20.20.14
+      - name: worker1
+        ip: 10.20.20.15
+  - name: bk8s
+    install_worker: true
+    install_network: true
+    network:
+      type: flannel
+      pod_network_cidr: "10.244.0.0/16"
+    master: 
+      - name: master
+        ip: 10.20.20.16
+    worker: 
+      - name: worker0
+        ip: 10.20.20.17
+  - name: wk8s
+    install_worker: true
+    install_network: true
+    network:
+      type: flannel
+      pod_network_cidr: "10.244.0.0/16"
+    master: 
+      - name: master
+        ip: 10.20.20.18
+    worker: 
+      - name: worker0
+        ip: 10.20.20.19
+      - name: worker1
+        ip: 10.20.20.20
+  - name: ek8s
+    install_worker: true
+    install_network: true
+    network:
+      type: flannel
+      pod_network_cidr: "10.244.0.0/16"
+    master: 
+      - name: master
+        ip: 10.20.20.21
+    worker: 
+      - name: worker0
+        ip: 10.20.20.22
+      - name: worker1
+        ip: 10.20.20.23
+  - name: ik8s
+    install_worker: false
+    install_network: false
+    master: 
+      - name: master
+        ip: 10.20.20.24
+    worker: 
+      - name: worker0
+        ip: 10.20.20.25
+
+  # management node
+  # this nodes used to access all kubernetes cluster
+  management:
+    name: management
+    ip: 10.20.20.26
+
+  # deployer node
+  # basically KVM host node
+  deployer:
+    ip: 10.20.20.1

@@ -1,0 +1,45 @@
+- name: Create VM & Configuring IP
+  hosts: deployer
+  roles:
+    - node-provisioning
+
+
+- name: Node Setup
+  hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}{% if not loop.last %},{% endif %}{% endfor %}
+  
+  roles:
+    - node-setup
+
+- name: Master Setup
+  hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endfor %}
+
+  roles:
+    - master-setup
+
+- name: Worker Setup
+  hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_worker %}{{ cluster.name }}worker{% if not loop.last %},{% endif %}{% endif %}{% endfor %}
+
+  roles:
+    - worker-setup
+
+- name: Flannel
+  hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_network %}{% if cluster.network.type == "flannel" %}{{ cluster.name }}worker{% if not loop.last %},{% endif %}{% endif %}{% endif %}{% endfor %}
+
+  roles:
+    - flannel
+
+- name: Calico
+  hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_network %}{% if cluster.network.type == "calico" %}{{ cluster.name }}worker{% if not loop.last %},{% endif %}{% endif %}{% endif %}{% endfor %}
+
+  roles:
+    - calico
+
+- name: kubeconfig-deployer
+  hosts: deployer
+  roles:
+    - deployer-kubeconfig
+
+- name: kubeconfig-management
+  hosts: management
+  roles:
+    - management-kubeconfig

@@ -1,0 +1,22 @@
+[deployer]
+{{ kubernetes.deployer.ip }}
+
+[management]
+{{ kubernetes.management.ip }}
+
+{% for cluster in kubernetes.cluster %}
+[{{ cluster.name }}:children]
+{{ cluster.name }}master
+{{ cluster.name }}worker
+
+[{{ cluster.name }}master]
+{% for master in cluster.master %}
+{{ master.ip }}
+{% endfor %}
+
+[{{ cluster.name }}worker]
+{% for worker in cluster.worker %}
+{{ worker.ip }}
+{% endfor %}
+
+{% endfor %}
