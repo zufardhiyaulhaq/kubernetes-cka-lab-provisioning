@@ -1,0 +1,11 @@
+---
+{% for cluster in kubernetes.cluster %}
+{% if cluster.install_network and cluster.network.type == "flannel" %}
+
+- name: Init Kubernetes cluster {{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}
+  shell: |
+    kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  when: ansible_hostname == '{{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}'
+
+{% endif %}
+{% endfor %}

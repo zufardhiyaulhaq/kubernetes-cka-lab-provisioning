@@ -1,6 +1,6 @@
 - name: create script directory
   file:
-    path: ~/script/{{ pod_name }}
+    path: ~/script/{{ vm_name }}
     state: directory
 
 - name: copy all template
@@ -9,17 +9,17 @@
     dest: "{{item.dest}}"
     mode: a+x
   with_items:
-    - { src: 'cluster1.sh.j2', dest: '~/script/{{ pod_name }}/cluster1.sh' }
-    - { src: 'cluster2.sh.j2', dest: '~/script/{{ pod_name }}/cluster2.sh' }
-    - { src: 'cluster3.sh.j2', dest: '~/script/{{ pod_name }}/cluster3.sh' }
-    - { src: 'management.sh.j2', dest: '~/script/{{ pod_name }}/management.sh' }
+    - { src: 'cluster.sh.j2', dest: '~/script/{{ vm_name }}/cluster.sh' }
+    - { src: 'management.sh.j2', dest: '~/script/{{ vm_name }}/management.sh' }
 
 - name: Create VM
-  shell: "bash {{item}}"
-  with_items:
-  - '~/script/{{ pod_name }}/cluster1.sh'
-  - '~/script/{{ pod_name }}/cluster2.sh'
-  - '~/script/{{ pod_name }}/cluster3.sh'
-  - '~/script/{{ pod_name }}/management.sh'
+  shell: "bash ~/script/{{ vm_name }}/cluster.sh"
+
+
+- name: Create Management
+  shell: "bash ~/script/{{ vm_name }}/management.sh"
+
+  
+
 
 

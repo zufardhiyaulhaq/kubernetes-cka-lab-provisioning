@@ -1,0 +1,17 @@
+---
+- name: create script directory
+  file:
+    path: ~/script/kubeconfig
+    state: directory
+
+- name: copy kubeconfig from all master into deployer
+  shell: |
+    {% for cluster in kubernetes.cluster %}
+    scp -o StrictHostKeyChecking=no {{ cluster.master[0].ip }}:~/.kube/config  ~/script/kubeconfig/{{ vm_name }}-{{ cluster.name }}
+    {% endfor %}
+
+- name: copy kubeconfig from all deployer to management
+  shell: |
+    {% for cluster in kubernetes.cluster %}
+    scp -o StrictHostKeyChecking=no ~/script/kubeconfig/{{ vm_name }}-{{ cluster.name }} {{ kubernetes.management.ip }}:~/
+    {% endfor %}

@@ -1,0 +1,12 @@
+---
+{% for cluster in kubernetes.cluster %}
+{% for worker in cluster.worker %}
+- name: Join to Kubernetes cluster {{ vm_name }}-{{ cluster.name }}
+  shell: |
+    kubeadm join --token {{ kubernetes_token }} \
+                --discovery-token-unsafe-skip-ca-verification \
+                {{ cluster.master[0].ip }}:6443
+  when: ansible_default_ipv4.address == '{{ worker.ip }}'
+
+{% endfor%}
+{% endfor%}
