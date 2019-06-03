@@ -6,7 +6,7 @@
   shell: |
     kubectl create -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
     kubectl create -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
-  when: inventory_hostname == '{{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}'
+  when: ansible_hostname == '{{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}'
 
 {% endif %}
 {% endfor %}

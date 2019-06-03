@@ -148,11 +148,11 @@ def management_kubeconfig():
         fh.write(template.render(config_data))
 
 if __name__ == "__main__":
-    hosts_generate()
+    #hosts_generate()
     main_tasks_generate()
-    master_setup_bootstraping()
-    worker_setup_bootstraping()
-    flannel()
-    calico()
-    deployer_kubeconfig()
-    management_kubeconfig()
+    #master_setup_bootstraping()
+    #worker_setup_bootstraping()
+    #flannel()
+    #calico()
+    #deployer_kubeconfig()
+    #management_kubeconfig()
