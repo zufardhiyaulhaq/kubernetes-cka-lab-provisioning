@@ -1,7 +1,7 @@
 virt-clone -o {{ template_vm }} -n {{ vm_name }}-{{ kubernetes.management.name }} -f /data/vms/{{ vm_name }}-{{ kubernetes.management.name }}.qcow2
 virsh start {{ vm_name }}-{{ kubernetes.management.name }}
 
-sleep 20
+sleep 60
 
 ssh {{ template_user }}@{{ template_ip }} /bin/bash << EOF
 sudo su
@@ -21,7 +21,7 @@ echo "{{ worker.ip }} {{ vm_name }}-{{ cluster.name }}-{{ worker.name }}" >> /et
 EOF
 
 virsh shutdown {{ vm_name }}-{{ kubernetes.management.name }}
-sleep 20
+sleep 60
 
 virsh detach-interface {{ vm_name }}-{{ kubernetes.management.name }} --type network --config
 virsh attach-interface --domain {{ vm_name }}-{{ kubernetes.management.name }} --type network --source {{ network_name }} --model virtio --config

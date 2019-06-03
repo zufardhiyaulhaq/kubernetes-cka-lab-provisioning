@@ -13,9 +13,13 @@
     - { src: 'management.sh.j2', dest: '~/script/{{ vm_name }}/management.sh' }
 
 - name: Create VM
-  shell: "bash {{item}}"
-  with_items:
-  - '~/script/{{ vm_name }}/cluster.sh'
-  - '~/script/{{ vm_name }}/management.sh'
+  shell: "bash ~/script/{{ vm_name }}/cluster.sh"
+
+
+- name: Create Management
+  shell: "bash ~/script/{{ vm_name }}/management.sh"
+
+  
+
 
 
