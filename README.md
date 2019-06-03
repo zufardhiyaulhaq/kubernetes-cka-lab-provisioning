@@ -23,7 +23,7 @@ Tools build with Ansible to provisioning multiple cluster Kubernetes cluster and
 - Install Ansible in KVM Server
 - Clone Repository
 ```
-git clone
+git clone https://github.com/zufardhiyaulhaq/CKA-Provisioning.git
 ```
 - Change variables
 ```
