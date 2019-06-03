@@ -17,7 +17,8 @@ Tools build with Ansible to provisioning multiple cluster Kubernetes cluster and
 
 #### Template Operating System
 - Ubuntu 16.04 server
-- KVM Server is able to SSH without password into Template Operating System (root and non-root). Example is using public key
+- KVM Server is able to SSH without password into Template Operating System (root) VM and SSH to KVM Server himself
+- Ansible playbook will create VM based on Template VM
 
 ## Instalation
 - Install Ansible in KVM Server
@@ -33,7 +34,7 @@ group_vars/all.yml
 ```
 python install.yaml
 ```
-- Run Ansible
+- Run Ansible in KVM server
 ```
 ansible-playbook main.yml -i hosts/hosts
 ```
@@ -47,7 +48,8 @@ CURRENT   NAME   CLUSTER           AUTHINFO                NAMESPACE
           hk8s   kubernetes-hk8s   kubernetes-admin-hk8s   
           ik8s   kubernetes-ik8s   kubernetes-admin-ik8s   
           k8s    kubernetes-k8s    kubernetes-admin-k8s    
-          wk8s   kubernetes-wk8s   kubernetes-admin-wk8s   
+          wk8s   kubernetes-wk8s   kubernetes-admin-wk8s
+          
 root@zu-management:~# kubectl config use-context k8s
 Switched to context "k8s".
 root@zu-management:~# kubectl get nodes
@@ -55,6 +57,7 @@ NAME             STATUS   ROLES    AGE   VERSION
 zu-k8s-master    Ready    master   37m   v1.14.1
 zu-k8s-worker0   Ready    <none>   19m   v1.14.1
 zu-k8s-worker1   Ready    <none>   19m   v1.14.1
+
 root@zu-management:~# kubectl config use-context ek8s
 Switched to context "ek8s".
 root@zu-management:~# kubectl get nodes
@@ -62,6 +65,7 @@ NAME              STATUS   ROLES    AGE   VERSION
 zu-ek8s-master    Ready    master   34m   v1.14.1
 zu-ek8s-worker0   Ready    <none>   19m   v1.14.1
 zu-ek8s-worker1   Ready    <none>   18m   v1.14.1
+
 root@zu-management:~# kubectl config use-context hk8s
 Switched to context "hk8s".
 root@zu-management:~# kubectl get nodes
@@ -69,17 +73,20 @@ NAME              STATUS   ROLES    AGE   VERSION
 zu-hk8s-master    Ready    master   37m   v1.14.1
 zu-hk8s-worker0   Ready    <none>   19m   v1.14.1
 zu-hk8s-worker1   Ready    <none>   19m   v1.14.1
+
 root@zu-management:~# kubectl config use-context ik8s
 Switched to context "ik8s".
 root@zu-management:~# kubectl get nodes
 NAME             STATUS     ROLES    AGE   VERSION
 zu-ik8s-master   NotReady   master   34m   v1.14.1
+
 root@zu-management:~# kubectl config use-context bk8s
 Switched to context "bk8s".
 root@zu-management:~# kubectl get nodes
 NAME              STATUS   ROLES    AGE   VERSION
 zu-bk8s-master    Ready    master   36m   v1.14.1
 zu-bk8s-worker0   Ready    <none>   19m   v1.14.1
+
 root@zu-management:~# kubectl config use-context wk8s
 Switched to context "wk8s".
 root@zu-management:~# kubectl get nodes
