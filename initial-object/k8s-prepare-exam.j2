@@ -1,0 +1,46 @@
+#########################################
+##### Run this on  Management Nodes #####
+#########################################
+
+ssh-keygen
+
+{% for cluster in kubernetes.cluster %}
+{% for master in cluster.master %}
+ssh-copy-id {{ master.ip }}
+{% endfor %}
+{% for worker in cluster.worker %}
+ssh-copy-id {{ worker.ip }}
+{% endfor %}
+{% endfor %}
+
+kubectl config use-context wk8s
+kubectl label nodes {{ vm_name }}-wk8s-worker0 name=wk8s-node-0
+kubectl label nodes {{ vm_name }}-wk8s-worker1 name=wk8s-node-1
+
+kubectl config use-context k8s
+kubectl create deployment showcase --image=nginx
+
+kubectl config use-context ek8s
+kubectl label nodes {{ vm_name }}-ek8s-worker0 name=ek8s-node-0
+kubectl label nodes {{ vm_name }}-ek8s-worker1 name=ek8s-node-1
+kubectl create -f ek8s/example-for-unavailable.yaml
+
+kubectl config use-context k8s
+kubectl create namespace productions
+kubectl create -f k8s/ofo.yaml
+
+kubectl config use-context k8s
+kubectl create -f k8s/pv-capacity.yaml
+
+kubectl config use-context k8s
+kubectl create -f k8s/front-end-pod.yaml
+
+kubectl config use-context k8s
+kubectl label nodes {{ vm_name }}-k8s-worker0 disk=spinning
+
+kubectl config use-context bk8s
+kubectl label nodes {{ vm_name }}-bk8s-worker0 name=bk8s-node-0
+
+kubectl config use-context k8s
+kubectl create -f k8s/L001.yaml
+

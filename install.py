@@ -147,6 +147,24 @@ def management_kubeconfig():
     with open("./roles/management-kubeconfig/tasks/02-kubeconfig.yml", "w") as fh:
         fh.write(template.render(config_data))
 
+def initial_object():
+    #Import necessary functions from Jinja2 module
+    from jinja2 import Environment, FileSystemLoader
+
+    #Import YAML module
+    import yaml
+
+    #Load data from YAML into Python dictionary
+    config_data = yaml.load(open('./group_vars/all.yml'))
+
+    #Load Jinja2 template
+    env = Environment(loader = FileSystemLoader('./initial-object'), trim_blocks=True, lstrip_blocks=True)
+    template = env.get_template('k8s-prepare-exam.j2')
+
+    #Render the template with data and print the output
+    with open("./initial-object/k8s-prepare-exam", "w") as fh:
+        fh.write(template.render(config_data))
+
 if __name__ == "__main__":
     hosts_generate()
     main_tasks_generate()
@@ -156,3 +174,4 @@ if __name__ == "__main__":
     calico()
     deployer_kubeconfig()
     management_kubeconfig()
+    initial_object()

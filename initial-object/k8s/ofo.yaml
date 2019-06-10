@@ -1,0 +1,56 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: productions
+  labels:
+    frontend: ofo
+    status: production
+  name: nginx-1
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: productions
+  labels:
+    frontend: ofo
+    status: production
+    type: backup
+  name: nginx-2
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+---
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: productions
+  labels:
+    frontend: ofo
+    status: development
+    type: backup
+  name: nginx-3
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ofo
+  namespace: productions
+spec:
+  selector:
+    frontend: ofo
+    status: production
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 80
