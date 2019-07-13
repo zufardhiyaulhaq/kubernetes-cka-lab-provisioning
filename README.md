@@ -16,7 +16,7 @@ Tools build with Ansible to provisioning multiple cluster Kubernetes cluster and
 - Template Operating System
 
 #### Template Operating System
-- Ubuntu 16.04 server
+- Ubuntu 16.04 server or Ubuntu 18.04 Server with interfaces configuration in /etc/network/interfaces
 - KVM Server is able to SSH without password into Template Operating System (root) VM and SSH to KVM Server himself
 - Ansible playbook will create VM based on Template VM
 
