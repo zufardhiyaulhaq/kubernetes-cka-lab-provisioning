@@ -22,6 +22,7 @@ Tools build with Ansible to provisioning multiple cluster Kubernetes cluster and
 
 ## Instalation
 - Install Ansible in KVM Server
+- Configure Ansible to disable `host key checking`
 - Clone Repository
 ```
 git clone https://github.com/zufardhiyaulhaq/CKA-Provisioning.git
