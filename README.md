@@ -33,7 +33,7 @@ group_vars/all.yml
 ```
 - Update Instalation
 ```
-python install.yaml
+python install.py
 ```
 - Run Ansible in KVM server
 ```
