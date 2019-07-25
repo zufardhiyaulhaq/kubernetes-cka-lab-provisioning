@@ -13,6 +13,9 @@ ssh-copy-id {{ worker.ip }}
 {% endfor %}
 {% endfor %}
 
+git clone https://github.com/zufardhiyaulhaq/CKA-Provisioning.git
+cd CKA-Provisioning/initial-object
+
 kubectl config use-context wk8s
 kubectl label nodes {{ vm_name }}-wk8s-worker0 name=wk8s-node-0
 kubectl label nodes {{ vm_name }}-wk8s-worker1 name=wk8s-node-1
