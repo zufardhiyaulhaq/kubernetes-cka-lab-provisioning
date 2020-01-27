@@ -13,9 +13,10 @@ Tools build with Ansible to provisioning multiple cluster Kubernetes cluster and
 #### Requirement
 - KVM Server
 - Routed Network in KVM
-- Template Operating System
+- Template Operating System (In my KVM environment, I have 1 VM to use as template if i want to create another VM by just clone the template VM)
 
 #### Template Operating System
+
 - Ubuntu 16.04 server or Ubuntu 18.04 Server with interfaces configuration in /etc/network/interfaces
 - KVM Server is able to SSH without password into Template Operating System (root) VM and SSH to KVM Server himself
 - Ansible playbook will create VM based on Template VM
@@ -25,7 +26,7 @@ Tools build with Ansible to provisioning multiple cluster Kubernetes cluster and
 - Configure Ansible to disable `host key checking`
 - Clone Repository
 ```
-git clone https://github.com/zufardhiyaulhaq/CKA-Provisioning.git
+git clone https://github.com/zufardhiyaulhaq/kubernetes-cka-lab-provisioning.git
 ```
 - Change variables
 ```
