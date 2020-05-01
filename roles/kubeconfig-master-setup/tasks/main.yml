@@ -1,4 +1,4 @@
 ---
 # tasks file for kubeconfig
-- include: 01-copy.yml
+- include: 01-fetch.yml
 

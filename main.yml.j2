@@ -1,34 +1,46 @@
 - name: Node Setup
+  become: true
   hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}{% if not loop.last %},{% endif %}{% endfor %}
   
   roles:
     - kubernetes-node-setup
 
 - name: Master Setup
+  become: true
   hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endfor %}
 
   roles:
     - kubernetes-master-setup
 
 - name: Worker Setup
+  become: true
   hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_worker %}{{ cluster.name }}worker{% if not loop.last %},{% endif %}{% endif %}{% endfor %}
 
   roles:
     - kubernetes-worker-setup
 
 - name: Networking Flannel Setup
+  become: true
   hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_network %}{% if cluster.network.type == "flannel" %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endif %}{% endif %}{% endfor %}
 
   roles:
     - networking-flannel-setup
 
 - name:  Networking Calico Setup
+  become: true
   hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_network %}{% if cluster.network.type == "calico" %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endif %}{% endif %}{% endfor %}
 
   roles:
     - networking-calico-setup
 
-- name: kubeconfig-management
+- name: kubeconfig-master-setup
+  become: true
+  hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endfor %}
+  roles:
+    - kubeconfig-master-setup
+
+- name: kubeconfig-management-setup
+  become: true
   hosts: management
   roles:
     - kubeconfig-management-setup

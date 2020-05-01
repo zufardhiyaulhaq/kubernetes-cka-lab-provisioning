@@ -18,5 +18,5 @@
 - name: install package
   apt:
     pkg:
-      - kubectl=1.14.1-00
+      - kubectl={{ kubernetes_version }}-00
     update_cache: yes

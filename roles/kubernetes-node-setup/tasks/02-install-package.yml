@@ -19,8 +19,8 @@
   apt:
     pkg:
       - docker.io
-      - kubectl=1.18.0-00
-      - kubelet=1.18.0-00
-      - kubeadm=1.18.0-00
+      - kubectl={{ kubernetes_version }}-00
+      - kubelet={{ kubernetes_version }}-00
+      - kubeadm={{ kubernetes_version }}-00
     update_cache: yes
 

@@ -1,0 +1,6 @@
+---
+- name: copy kubeconfig from all master into deployer
+  fetch:
+    src: ~/.kube/config
+    dest: kubeconfig-buffer/{{ group_names }}
+    flat: yes
