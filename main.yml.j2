@@ -1,45 +1,34 @@
-- name: Create VM & Configuring IP
-  hosts: deployer
-  roles:
-    - node-provisioning
-
-
 - name: Node Setup
   hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}{% if not loop.last %},{% endif %}{% endfor %}
   
   roles:
-    - node-setup
+    - kubernetes-node-setup
 
 - name: Master Setup
   hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endfor %}
 
   roles:
-    - master-setup
+    - kubernetes-master-setup
 
 - name: Worker Setup
   hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_worker %}{{ cluster.name }}worker{% if not loop.last %},{% endif %}{% endif %}{% endfor %}
 
   roles:
-    - worker-setup
+    - kubernetes-worker-setup
 
-- name: Flannel
+- name: Networking Flannel Setup
   hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_network %}{% if cluster.network.type == "flannel" %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endif %}{% endif %}{% endfor %}
 
   roles:
-    - flannel
+    - networking-flannel-setup
 
-- name: Calico
+- name:  Networking Calico Setup
   hosts: {% for cluster in kubernetes.cluster %}{% if cluster.install_network %}{% if cluster.network.type == "calico" %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endif %}{% endif %}{% endfor %}
 
   roles:
-    - calico
-
-- name: kubeconfig-deployer
-  hosts: deployer
-  roles:
-    - deployer-kubeconfig
+    - networking-calico-setup
 
 - name: kubeconfig-management
   hosts: management
   roles:
-    - management-kubeconfig
+    - kubeconfig-management-setup

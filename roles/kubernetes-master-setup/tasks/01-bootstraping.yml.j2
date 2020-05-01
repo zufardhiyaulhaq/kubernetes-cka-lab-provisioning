@@ -1,17 +1,17 @@
 ---
 {% for cluster in kubernetes.cluster %}
 {% if cluster.install_network %}
-- name: Init Kubernetes cluster {{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}
+- name: Init Kubernetes cluster {{ cluster.name }}-{{ cluster.master[0].name }}
   shell: |
     kubeadm init --pod-network-cidr {{ cluster.network.pod_network_cidr }} \
                  --token {{ kubernetes_token }}
-  when: ansible_hostname == '{{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}'
+  when: ansible_hostname == '{{ cluster.name }}-{{ cluster.master[0].name }}'
 
 {% else %}
-- name: Init Kubernetes cluster {{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}
+- name: Init Kubernetes cluster {{ cluster.name }}-{{ cluster.master[0].name }}
   shell: |
     kubeadm init --token {{ kubernetes_token }}
-  when: ansible_hostname == '{{ vm_name }}-{{ cluster.name }}-{{ cluster.master[0].name }}'
+  when: ansible_hostname == '{{ cluster.name }}-{{ cluster.master[0].name }}'
 {% endif%}
 {% endfor%}
 

@@ -17,15 +17,15 @@ git clone https://github.com/zufardhiyaulhaq/CKA-Provisioning.git
 cd CKA-Provisioning/initial-object
 
 kubectl config use-context wk8s
-kubectl label nodes {{ vm_name }}-wk8s-worker0 name=wk8s-node-0
-kubectl label nodes {{ vm_name }}-wk8s-worker1 name=wk8s-node-1
+kubectl label nodes wk8s-worker0 name=wk8s-node-0
+kubectl label nodes wk8s-worker1 name=wk8s-node-1
 
 kubectl config use-context k8s
 kubectl create deployment showcase --image=nginx
 
 kubectl config use-context ek8s
-kubectl label nodes {{ vm_name }}-ek8s-worker0 name=ek8s-node-0
-kubectl label nodes {{ vm_name }}-ek8s-worker1 name=ek8s-node-1
+kubectl label nodes ek8s-worker0 name=ek8s-node-0
+kubectl label nodes ek8s-worker1 name=ek8s-node-1
 kubectl create -f ek8s/example-for-unavailable.yaml
 
 kubectl config use-context k8s
@@ -39,10 +39,10 @@ kubectl config use-context k8s
 kubectl create -f k8s/front-end-pod.yaml
 
 kubectl config use-context k8s
-kubectl label nodes {{ vm_name }}-k8s-worker0 disk=spinning
+kubectl label nodes k8s-worker0 disk=spinning
 
 kubectl config use-context bk8s
-kubectl label nodes {{ vm_name }}-bk8s-worker0 name=bk8s-node-0
+kubectl label nodes bk8s-worker0 name=bk8s-node-0
 
 kubectl config use-context k8s
 kubectl create -f k8s/L001.yaml

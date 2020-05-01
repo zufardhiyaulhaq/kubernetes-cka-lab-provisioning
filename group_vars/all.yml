@@ -1,25 +1,10 @@
 # python interpreter
-# by default ubuntu 16.04 using python3
+# by default ubuntu 18.04 using python3
 ansible_python_interpreter: /usr/bin/python3
 
-# Template in KVM
-# you can create by yourself
-template_vm: template-ubuntu1604
-template_ip: 192.168.100.254
-template_user: root
-
-# Network in KVM
-# you can create by yourself
-network_name: net-10.200.200
-netmask: 255.255.255.0
-gateway: 10.200.200.1
-
+# kubernetes config
 kubeadmin_config: /etc/kubernetes/admin.conf
 kubernetes_token: b0f7b8.8d1767876297d85c
-
-# vm_name variable is used for creating KVM instance name
-# for example, zu, all instance name will start with zu
-vm_name: zu
 
 # Kubernetes Cluster
 kubernetes:
@@ -109,6 +94,5 @@ kubernetes:
     ip: 10.200.200.166
 
   # deployer node
-  # basically KVM host node
   deployer:
     ip: 10.200.200.1

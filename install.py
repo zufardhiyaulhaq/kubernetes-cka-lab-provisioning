@@ -49,11 +49,11 @@ def master_setup_bootstraping():
     config_data = yaml.load(open('./group_vars/all.yml'))
 
     #Load Jinja2 template
-    env = Environment(loader = FileSystemLoader('./roles/master-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
+    env = Environment(loader = FileSystemLoader('./roles/kubernetes-master-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
     template = env.get_template('01-bootstraping.yml.j2')
 
     #Render the template with data and print the output
-    with open("./roles/master-setup/tasks/01-bootstraping.yml", "w") as fh:
+    with open("./roles/kubernetes-master-setup/tasks/01-bootstraping.yml", "w") as fh:
         fh.write(template.render(config_data))
 
 
@@ -68,11 +68,11 @@ def worker_setup_bootstraping():
     config_data = yaml.load(open('./group_vars/all.yml'))
 
     #Load Jinja2 template
-    env = Environment(loader = FileSystemLoader('./roles/worker-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
+    env = Environment(loader = FileSystemLoader('./roles/kubernetes-worker-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
     template = env.get_template('01-bootstraping.yml.j2')
 
     #Render the template with data and print the output
-    with open("./roles/worker-setup/tasks/01-bootstraping.yml", "w") as fh:
+    with open("./roles/kubernetes-worker-setup/tasks/01-bootstraping.yml", "w") as fh:
         fh.write(template.render(config_data))
 
 def flannel():
@@ -86,11 +86,11 @@ def flannel():
     config_data = yaml.load(open('./group_vars/all.yml'))
 
     #Load Jinja2 template
-    env = Environment(loader = FileSystemLoader('./roles/flannel/tasks/'), trim_blocks=True, lstrip_blocks=True)
+    env = Environment(loader = FileSystemLoader('./roles/networking-flannel-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
     template = env.get_template('flannel.yml.j2')
 
     #Render the template with data and print the output
-    with open("./roles/flannel/tasks/flannel.yml", "w") as fh:
+    with open("./roles/networking-flannel-setup/tasks/flannel.yml", "w") as fh:
         fh.write(template.render(config_data))
 
 def calico():
@@ -104,11 +104,11 @@ def calico():
     config_data = yaml.load(open('./group_vars/all.yml'))
 
     #Load Jinja2 template
-    env = Environment(loader = FileSystemLoader('./roles/calico/tasks/'), trim_blocks=True, lstrip_blocks=True)
+    env = Environment(loader = FileSystemLoader('./roles/networking-calico-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
     template = env.get_template('calico.yml.j2')
 
     #Render the template with data and print the output
-    with open("./roles/calico/tasks/calico.yml", "w") as fh:
+    with open("./roles/networking-calico-setup/tasks/calico.yml", "w") as fh:
         fh.write(template.render(config_data))
 
 def deployer_kubeconfig():
@@ -122,11 +122,11 @@ def deployer_kubeconfig():
     config_data = yaml.load(open('./group_vars/all.yml'))
 
     #Load Jinja2 template
-    env = Environment(loader = FileSystemLoader('./roles/deployer-kubeconfig/tasks/'), trim_blocks=True, lstrip_blocks=True)
+    env = Environment(loader = FileSystemLoader('./roles/kubeconfig-deployer-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
     template = env.get_template('01-copy.yml.j2')
 
     #Render the template with data and print the output
-    with open("./roles/deployer-kubeconfig/tasks/01-copy.yml", "w") as fh:
+    with open("./roles/kubeconfig-deployer-setup/tasks/01-copy.yml", "w") as fh:
         fh.write(template.render(config_data))
 
 def management_kubeconfig():
@@ -140,11 +140,11 @@ def management_kubeconfig():
     config_data = yaml.load(open('./group_vars/all.yml'))
 
     #Load Jinja2 template
-    env = Environment(loader = FileSystemLoader('./roles/management-kubeconfig/tasks/'), trim_blocks=True, lstrip_blocks=True)
+    env = Environment(loader = FileSystemLoader('./roles/kubeconfig-management-setup/tasks/'), trim_blocks=True, lstrip_blocks=True)
     template = env.get_template('02-kubeconfig.yml.j2')
 
     #Render the template with data and print the output
-    with open("./roles/management-kubeconfig/tasks/02-kubeconfig.yml", "w") as fh:
+    with open("./roles/kubeconfig-management-setup/tasks/02-kubeconfig.yml", "w") as fh:
         fh.write(template.render(config_data))
 
 def initial_object():

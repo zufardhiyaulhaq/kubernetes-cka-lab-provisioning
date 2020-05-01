@@ -1,7 +1,7 @@
 ---
 {% for cluster in kubernetes.cluster %}
 {% for worker in cluster.worker %}
-- name: Join to Kubernetes cluster {{ vm_name }}-{{ cluster.name }}
+- name: Join to Kubernetes cluster {{ cluster.name }}
   shell: |
     kubeadm join --token {{ kubernetes_token }} \
                 --discovery-token-unsafe-skip-ca-verification \
