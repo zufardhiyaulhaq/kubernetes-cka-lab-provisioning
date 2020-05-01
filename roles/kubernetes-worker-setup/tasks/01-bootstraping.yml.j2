@@ -6,7 +6,7 @@
     kubeadm join --token {{ kubernetes_token }} \
                 --discovery-token-unsafe-skip-ca-verification \
                 {{ cluster.master[0].ip }}:6443
-  when: ansible_default_ipv4.address == '{{ worker.ip }}'
+  when: inventory_hostname == '{{ cluster.name }}-{{ worker.name }}'
 
 {% endfor%}
 {% endfor%}

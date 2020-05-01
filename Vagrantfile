@@ -173,7 +173,7 @@ Vagrant.configure('2') do |config|
       'ik8s:children' => %w[ik8smaster ik8sworker],
       'ik8smaster' => %w[ik8s-master],
       'ik8sworker' => %w[ik8s-worker1],
-      'management' => %w[ik8s-worker1]
+      'management' => %w[management]
     }
     ansible.playbook = 'main.yml'
   end

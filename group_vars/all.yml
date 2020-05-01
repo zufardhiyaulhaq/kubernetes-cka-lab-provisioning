@@ -20,9 +20,9 @@ kubernetes:
       - name: master
         ip: 10.200.200.100
     worker: 
-      - name: worker0
-        ip: 10.200.200.101
       - name: worker1
+        ip: 10.200.200.101
+      - name: worker2
         ip: 10.200.200.102
   - name: hk8s
     install_worker: true
@@ -34,9 +34,9 @@ kubernetes:
       - name: master
         ip: 10.200.200.110
     worker: 
-      - name: worker0
-        ip: 10.200.200.111
       - name: worker1
+        ip: 10.200.200.111
+      - name: worker2
         ip: 10.200.200.112
   - name: bk8s
     install_worker: true
@@ -48,7 +48,7 @@ kubernetes:
       - name: master
         ip: 10.200.200.120
     worker: 
-      - name: worker0
+      - name: worker1
         ip: 10.200.200.121
   - name: wk8s
     install_worker: true
@@ -60,9 +60,9 @@ kubernetes:
       - name: master
         ip: 10.200.200.130
     worker: 
-      - name: worker0
-        ip: 10.200.200.131
       - name: worker1
+        ip: 10.200.200.131
+      - name: worker2
         ip: 10.200.200.132
   - name: ek8s
     install_worker: true
@@ -74,9 +74,9 @@ kubernetes:
       - name: master
         ip: 10.200.200.140
     worker: 
-      - name: worker0
-        ip: 10.200.200.141
       - name: worker1
+        ip: 10.200.200.141
+      - name: worker2
         ip: 10.200.200.142
   - name: ik8s
     install_worker: false
@@ -85,7 +85,7 @@ kubernetes:
       - name: master
         ip: 10.200.200.150
     worker: 
-      - name: worker0
+      - name: worker1
         ip: 10.200.200.151
 
   # management node

@@ -4,8 +4,7 @@
 
 - name: Init Kubernetes cluster {{ cluster.name }}-{{ cluster.master[0].name }}
   shell: |
-    kubectl create -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
-    kubectl create -f https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+    kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
   when: ansible_hostname == '{{ cluster.name }}-{{ cluster.master[0].name }}'
 
 {% endif %}

@@ -36,6 +36,7 @@
 - name: kubeconfig-master-setup
   become: true
   hosts: {% for cluster in kubernetes.cluster %}{{ cluster.name }}master{% if not loop.last %},{% endif %}{% endfor %}
+  
   roles:
     - kubeconfig-master-setup
 
