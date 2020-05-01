@@ -17,12 +17,12 @@ kubernetes:
       pod_network_cidr: "10.244.0.0/16"
     master:
       - name: master
-        ip: 10.200.200.150
+        ip: 10.200.200.100
     worker: 
       - name: worker0
-        ip: 10.200.200.151
+        ip: 10.200.200.101
       - name: worker1
-        ip: 10.200.200.152
+        ip: 10.200.200.102
   - name: hk8s
     install_worker: true
     install_network: true
@@ -31,12 +31,12 @@ kubernetes:
       pod_network_cidr: "192.168.0.0/16"
     master: 
       - name: master
-        ip: 10.200.200.153
+        ip: 10.200.200.110
     worker: 
       - name: worker0
-        ip: 10.200.200.154
+        ip: 10.200.200.111
       - name: worker1
-        ip: 10.200.200.155
+        ip: 10.200.200.112
   - name: bk8s
     install_worker: true
     install_network: true
@@ -45,10 +45,10 @@ kubernetes:
       pod_network_cidr: "10.244.0.0/16"
     master: 
       - name: master
-        ip: 10.200.200.156
+        ip: 10.200.200.120
     worker: 
       - name: worker0
-        ip: 10.200.200.157
+        ip: 10.200.200.121
   - name: wk8s
     install_worker: true
     install_network: true
@@ -57,12 +57,12 @@ kubernetes:
       pod_network_cidr: "10.244.0.0/16"
     master: 
       - name: master
-        ip: 10.200.200.158
+        ip: 10.200.200.130
     worker: 
       - name: worker0
-        ip: 10.200.200.159
+        ip: 10.200.200.131
       - name: worker1
-        ip: 10.200.200.160
+        ip: 10.200.200.132
   - name: ek8s
     install_worker: true
     install_network: true
@@ -71,28 +71,24 @@ kubernetes:
       pod_network_cidr: "10.244.0.0/16"
     master: 
       - name: master
-        ip: 10.200.200.161
+        ip: 10.200.200.140
     worker: 
       - name: worker0
-        ip: 10.200.200.162
+        ip: 10.200.200.141
       - name: worker1
-        ip: 10.200.200.163
+        ip: 10.200.200.142
   - name: ik8s
     install_worker: false
     install_network: false
     master: 
       - name: master
-        ip: 10.200.200.164
+        ip: 10.200.200.150
     worker: 
       - name: worker0
-        ip: 10.200.200.165
+        ip: 10.200.200.151
 
   # management node
   # this nodes used to access all kubernetes cluster
   management:
     name: management
-    ip: 10.200.200.166
-
-  # deployer node
-  deployer:
-    ip: 10.200.200.1
+    ip: 10.200.200.160
