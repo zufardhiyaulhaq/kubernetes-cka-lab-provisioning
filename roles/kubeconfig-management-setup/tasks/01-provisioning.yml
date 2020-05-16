@@ -37,6 +37,12 @@
     src: kube-ps1.sh.j2
     dest: /root/kube-ps1.sh
 
+- name: install helm 3
+  shell: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+- name: install istioctl
+  shell: curl -L https://istio.io/downloadIstio | sh -
+
 - name: Insert configuration bashrc
   blockinfile:
     path: /root/.bashrc
@@ -45,6 +51,3 @@
       source <(kubectl completion bash)
       source /root/kube-ps1.sh
       PS1='[\u@\h \W $(kube_ps1)]\$ '
-
-- name: install kubectl plugin
-  shell: . /root/.bashrc && kubectl krew install ctx && kubectl krew install ns

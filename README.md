@@ -92,3 +92,18 @@ wk8s-master    Ready    master   12m   v1.18.0
 wk8s-worker1   Ready    <none>   11m   v1.18.0
 wk8s-worker2   Ready    <none>   10m   v1.18.0
 ```
+
+## Management Node
+Adding some plugin and auto-complete kubectl in the installation
+- kubectl completion
+- kubectl krew
+- kube-ps1
+- helm 3
+- istioctl
+
+install some plugin
+```
+kubectl krew install ctx
+kubectl krew install ns
+```
+
