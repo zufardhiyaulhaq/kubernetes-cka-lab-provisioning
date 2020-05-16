@@ -98,11 +98,12 @@ Adding some plugin and auto-complete kubectl in the installation
 - kubectl completion
 - kubectl krew
 - kube-ps1
-- helm 3
-- istioctl
 
 install some plugin
 ```
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+curl -L https://istio.io/downloadIstio | sh -
+
 kubectl krew install ctx
 kubectl krew install ns
 ```
