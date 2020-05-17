@@ -1,12 +1,25 @@
 ---
 {% for cluster in kubernetes.cluster %}
 {% for worker in cluster.worker %}
+- name: Configure node ip
+  lineinfile:
+    path: /etc/default/kubelet
+    line: KUBELET_EXTRA_ARGS=--node-ip={{ worker.ip }}
+    create: yes
+  when: ansible_hostname == '{{ cluster.name }}-{{ worker.name }}'
+
+- name: Restart kubelet
+  service:
+    name: kubelet
+    daemon_reload: yes
+    state: restarted
+  when: ansible_hostname == '{{ cluster.name }}-{{ worker.name }}'
+  
 - name: Join to Kubernetes cluster {{ cluster.name }}
   shell: |
     kubeadm join --token {{ kubernetes_token }} \
                 --discovery-token-unsafe-skip-ca-verification \
                 {{ cluster.master[0].ip }}:6443
   when: inventory_hostname == '{{ cluster.name }}-{{ worker.name }}'
-
 {% endfor%}
 {% endfor%}
