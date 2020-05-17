@@ -6,12 +6,14 @@
     path: /etc/default/kubelet
     line: KUBELET_EXTRA_ARGS=--node-ip={{ cluster.master[0].ip }}
     create: yes
+  when: ansible_hostname == '{{ cluster.name }}-{{ cluster.master[0].name }}'
 
 - name: Restart kubelet
   service:
     name: kubelet
     daemon_reload: yes
     state: restarted
+  when: ansible_hostname == '{{ cluster.name }}-{{ cluster.master[0].name }}'
 
 - name: Init Kubernetes cluster {{ cluster.name }}-{{ cluster.master[0].name }}
   shell: |
@@ -27,12 +29,14 @@
     path: /etc/default/kubelet
     line: KUBELET_EXTRA_ARGS=--node-ip={{ cluster.master[0].ip }}
     create: yes
+  when: ansible_hostname == '{{ cluster.name }}-{{ cluster.master[0].name }}'
 
 - name: Restart kubelet
   service:
     name: kubelet
     daemon_reload: yes
     state: restarted
+  when: ansible_hostname == '{{ cluster.name }}-{{ cluster.master[0].name }}'
 
 - name: Init Kubernetes cluster {{ cluster.name }}-{{ cluster.master[0].name }}
   shell: |
