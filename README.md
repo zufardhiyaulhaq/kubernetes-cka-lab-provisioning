@@ -102,7 +102,7 @@ Adding some plugin and auto-complete kubectl in the installation
 install some plugin
 ```
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-curl -L https://istio.io/downloadIstio | sh -
+curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.3 sh -
 
 kubectl krew install ctx
 kubectl krew install ns
